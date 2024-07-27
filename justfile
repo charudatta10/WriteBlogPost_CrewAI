@@ -56,6 +56,11 @@ exe file_name:
 
 #########-ADD-Custom-Tasks-Here-##################
 
+train:
+    #!pwsh
+    conda activate w
+    p src/main.py
+
 
 
 
