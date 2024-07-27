@@ -1,0 +1,24 @@
+name: conda
+channels:
+  -  conda-forge
+dependencies:
+  - crewai
+  - langchain
+  - langchain_community
+  - pip:
+    - requests==2.25.1
+
+---
+
+name: scoop
+src: https://github.com/ScoopInstaller/Scoop
+version: latest
+channels:
+  - main
+  - extra
+dependencies:
+  - ollama
+    - gemma:2b
+
+
+
