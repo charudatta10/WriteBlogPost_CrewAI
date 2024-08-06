@@ -21,6 +21,8 @@ from langchain_community.llms import Ollama
 
 ollama_model = Ollama(model="gemma:2b")   
 
+
+
  
 # # Define your agents with roles and goals 
 researcher = Agent(   role='Researcher',
