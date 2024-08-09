@@ -19,7 +19,7 @@ import os
 from crewai import Agent, Task, Crew, Process  
 from langchain_community.llms import Ollama 
 
-ollama_model = Ollama(model="gemma:2b")   
+ollama_model = Ollama(model="qwen:0.5b")   
 
 
 
