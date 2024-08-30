@@ -19,42 +19,54 @@
 set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 
 default:
-    just --list --unsorted
+    @just --choose
 
+# create files and directories
 init:
     #!pwsh
     git init
-    New-Item -ItemType "file" -Path ".gitattribute", "main.py", "requirement.yaml"
-    New-Item -ItemType "directory" -Path "archives", "docs", "src", "test"
+    New-Item -ItemType "file" -Path ".gitattribute", "main.py", "requirements.json", "config.json"
+    New-Item -ItemType "directory" -Path "docs", "src", "tests"
     New-Item -ItemType "file" -Path .\* -Name "__init__.py" -ErrorAction SilentlyContinue
     gig gen python > .gitignore 
-    u
+    Add-LicenseHeader
+    7z a archives.7z .gitignore
 
+# set configuration variables
 config:
-    dynaconf init -f json 
+    #!pwsh
+    config.json >> .gitignore
+    Set-EnvFromJson
 
-doc:
+# add documentation to repo
+docs:
     #!pwsh
     conda activate blog
-    p -m mkdocs new .
-    
-readme:
-    python C:/Users/chaitrali/Documents/GitHub/readme-generator
+    python -m mkdocs new .
 
+# genearte and readme to repo    
+readme:
+    #!pwsh
+    conda activate w
+    python C:/Users/$env:username/Documents/GitHub/readmeGen/main.py
+
+# version control repo with git
 commit message="init":
     #!pwsh
     git add .
     git commit -m {{message}}
 
+# create windows executable
 exe file_name:
     #!pwsh
-    pyintsaller src/{{file_name}} -onefile
+    pyinstaller src/{{file_name}} --onefile
 
-#alias b := build
-#build: 
-#   echo "hi"; echo "bye"
+# run python unit test 
+tests:
+    #!pwsh
+    python -m unittest discover -s tests
 
-#########-ADD-Custom-Tasks-Here-##################
+# Add custom tasks, enviroment variables
 
 train:
     #!pwsh
