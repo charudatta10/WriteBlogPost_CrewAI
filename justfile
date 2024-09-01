@@ -19,15 +19,17 @@
 set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 
 default:
-    @just --choose
+    @just --choose --unsorted
 
+nope:
+    #!pwsh
+    Write-Host "Copyright ©️ 2024 CK ™️ @ charudatta10"
 # create files and directories
 init:
     #!pwsh
     git init
-    New-Item -ItemType "file" -Path ".gitattribute", "main.py", "requirements.json", "config.json"
+    New-Item -ItemType "file" -Path ".env", ".gitattribute",  "main.py", "requirements.yaml"
     New-Item -ItemType "directory" -Path "docs", "src", "tests"
-    New-Item -ItemType "file" -Path .\* -Name "__init__.py" -ErrorAction SilentlyContinue
     gig gen python > .gitignore 
     Add-LicenseHeader
     7z a archives.7z .gitignore
@@ -35,8 +37,7 @@ init:
 # set configuration variables
 config:
     #!pwsh
-    config.json >> .gitignore
-    Set-EnvFromJson
+    SetEnvVar
 
 # add documentation to repo
 docs:

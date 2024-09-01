@@ -34,13 +34,6 @@ def multiplication_tool(url:str) -> str:
     return first_number * second_number
 
 
-
-# Define custom tools using classes and the @tool decorator
-#@tool("Web Scraper")
-
-#@tool("PDF Indexer")
-
-
 # Define your agents with roles and goals
 researcher = Agent(
     role='Teacher',
