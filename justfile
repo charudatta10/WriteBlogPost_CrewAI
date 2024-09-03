@@ -73,6 +73,13 @@ train:
     #!pwsh
     conda activate w
     p src/main.py
+run:
+    #!pwsh
+    ollama run gemma:2b &
+    conda activate w
+    python src/ai_write_blog_post_v4.py
+    
+
 
 
 
